@@ -1,0 +1,12 @@
+# Private files
+Cheat Sheet.gdoc
+Project notes.gdoc
+git_setup.ipynb
+
+# Python cache and checkpoints
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Optional: hide processed data if you don’t want it public
+data/processed/
