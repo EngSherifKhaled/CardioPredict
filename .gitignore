@@ -2,6 +2,8 @@
 Cheat Sheet.gdoc
 Project notes.gdoc
 git_setup.ipynb
+git.txt
+.vscode/
 
 # Python cache and checkpoints
 __pycache__/
