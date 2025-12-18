@@ -21,8 +21,8 @@ Predict the likelihood of heart disease using patient information.
 # ================== Load Model & Imputation ==================
 @st.cache_resource
 def load_model_and_imputers():
-    model = joblib.load("rf_pipeline.pkl")
-    impute_values = joblib.load("impute_values.pkl")
+    model = joblib.load("model/rf_pipeline.pkl")
+    impute_values = joblib.load("model/impute_values.pkl")
     median_values = impute_values["median"]
     mode_values = impute_values["mode"]
     return model, median_values, mode_values
