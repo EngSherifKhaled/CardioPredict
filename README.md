@@ -1,5 +1,7 @@
 # CardioPredict: AI-Powered Heart Disease Risk Predictor
 
+🔗 **Live Demo:** https://cardiopredictapp.streamlit.app
+
 CardioPredict leverages the UCI Heart Disease dataset to **estimate the probability of heart disease** in a patient.  
 Explainable AI techniques are integrated to ensure model transparency and support clinical trust in predictions.
 
@@ -101,3 +103,4 @@ CardioPredict/
 This project is a **research and demonstration tool only**.  
 It **does not provide clinical diagnoses**.  
 Always consult qualified healthcare professionals for medical decisions.
+
