@@ -4,13 +4,16 @@ import pandas as pd
 
 # ================== Page Config ==================
 st.set_page_config(
-    page_title="Heart Disease Risk Predictor",
+    page_title="CardioPredict",
     page_icon="❤️",
     layout="centered",
     initial_sidebar_state="expanded",
 )
 
-st.title("Heart Disease Risk Predictor")
+# ================== Page Header ==================
+st.title("CardioPredict")
+st.caption("AI-powered heart disease risk assessment • Demonstration only")
+
 st.markdown(
     """
 Predict the likelihood of heart disease using patient information.  
