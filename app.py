@@ -4,13 +4,16 @@ import pandas as pd
 
 # ================== Page Config ==================
 st.set_page_config(
-    page_title="Heart Disease Risk Predictor",
+    page_title="CardioPredict",
     page_icon="❤️",
     layout="centered",
     initial_sidebar_state="expanded",
 )
 
-st.title("Heart Disease Risk Predictor")
+# ================== Page Header ==================
+st.title("CardioPredict")
+st.caption("AI-powered heart disease risk assessment • Demonstration only")
+
 st.markdown(
     """
 Predict the likelihood of heart disease using patient information.  
@@ -44,39 +47,87 @@ def fill_missing(df):
 with st.sidebar.form("patient_form"):
     st.header("Patient Information")
 
-    # ----- Numeric Inputs -----
-    st.subheader("Numeric Inputs")
+    # ----- Demographics -----
+    st.subheader("Demographics")
     age_unknown = st.checkbox("Age Unknown?")
-    age = None if age_unknown else st.slider("Age", 20, 100, 30, help="Patient's age in years.")
+    age = None if age_unknown else st.slider(
+        "Age", 20, 100, 30, help="Patient's age in years."
+    )
 
+    sex = st.selectbox(
+        "Sex", ["Male", "Female"], help="Biological sex at birth."
+    )
+
+    # ----- Medical History -----
+    st.subheader("Medical History")
+    cp = st.selectbox(
+        "Chest Pain Type",
+        ["Unknown", "typical angina", "atypical angina", "non-anginal", "asymptomatic"],
+        help="Type of chest pain experienced by the patient."
+    )
+
+    fbs = st.selectbox(
+        "Fasting Blood Sugar >120 mg/dL?",
+        ["Unknown", "Yes", "No"],
+        help="Whether fasting blood sugar is higher than 120 mg/dL (Yes=1, No=0)."
+    )
+
+    exang = st.selectbox(
+        "Exercise-Induced Angina",
+        ["Unknown", "Yes", "No"],
+        help="Whether patient experiences chest pain during exercise."
+    )
+
+    # ----- Vital Signs & Exercise -----
+    st.subheader("Vital Signs & Exercise")
     trestbps_unknown = st.checkbox("Resting BP Unknown?")
-    trestbps = None if trestbps_unknown else st.slider("Resting BP (mmHg)", 80, 200, 120, help="Systolic BP at rest.")
+    trestbps = None if trestbps_unknown else st.slider(
+        "Resting BP (mmHg)", 80, 200, 120, help="Systolic blood pressure at rest."
+    )
 
     chol_unknown = st.checkbox("Cholesterol Unknown?")
-    chol = None if chol_unknown else st.slider("Cholesterol (mg/dL)", 100, 400, 200, help="Serum cholesterol level.")
+    chol = None if chol_unknown else st.slider(
+        "Cholesterol (mg/dL)", 100, 400, 200, help="Serum cholesterol level."
+    )
 
     thalch_unknown = st.checkbox("Max Heart Rate Unknown?")
-    thalch = None if thalch_unknown else st.slider("Max Heart Rate Achieved", 60, 220, 150, help="Heart rate during exercise.")
+    thalch = None if thalch_unknown else st.slider(
+        "Max Heart Rate Achieved", 60, 220, 150, help="Maximum heart rate during exercise."
+    )
 
     oldpeak_unknown = st.checkbox("ST Depression Unknown?")
-    oldpeak = None if oldpeak_unknown else st.slider("ST Depression (oldpeak)", 0.0, 10.0, 1.0, 0.1, help="ST segment depression during exercise.")
+    oldpeak = None if oldpeak_unknown else st.slider(
+        "ST Depression (oldpeak)", 0.0, 10.0, 1.0, 0.1, help="ST segment depression during exercise."
+    )
 
-    # ----- Binary Inputs -----
-    st.subheader("Binary Inputs")
-    fbs = st.selectbox("Fasting Blood Sugar >120 mg/dL?", ["Unknown", "Yes", "No"], help="Yes=1, No=0")
-    exang = st.selectbox("Exercise Induced Angina", ["Unknown", "Yes", "No"], help="Yes=1, No=0")
+    # ----- ECG & Test Results -----
+    st.subheader("ECG & Test Results")
+    restecg = st.selectbox(
+        "Resting ECG",
+        ["Unknown", "normal", "lv hypertrophy", "st-t abnormality"],
+        help="Electrocardiogram results at rest."
+    )
 
-    # ----- Categorical Inputs -----
-    st.subheader("Categorical Inputs")
-    sex = st.selectbox("Sex", ["Male", "Female"], help="Biological sex")
-    cp = st.selectbox("Chest Pain Type", ["Unknown", "typical angina", "atypical angina", "non-anginal", "asymptomatic"], help="Type of chest pain")
-    restecg = st.selectbox("Resting ECG", ["Unknown", "normal", "lv hypertrophy", "st-t abnormality"], help="ECG results at rest")
-    slope = st.selectbox("Slope of Peak Exercise ST Segment", ["Unknown", "upsloping", "flat", "downsloping"], help="ST segment pattern")
-    ca = st.selectbox("Number of Major Vessels (ca)", ["Unknown", 0, 1, 2, 3, 4], help="Vessels colored by fluoroscopy")
-    thal = st.selectbox("Thalassemia", ["Unknown", "normal", "fixed defect", "reversable defect"], help="Type of thalassemia defect")
+    slope = st.selectbox(
+        "Slope of Peak Exercise ST Segment",
+        ["Unknown", "upsloping", "flat", "downsloping"],
+        help="Pattern of ST segment during peak exercise."
+    )
+
+    ca = st.selectbox(
+        "Number of Major Vessels (0–4)",
+        ["Unknown", 0, 1, 2, 3, 4],
+        help="Number of vessels colored by fluoroscopy."
+    )
+
+    thal = st.selectbox(
+        "Thalassemia Type",
+        ["Unknown", "normal", "fixed defect", "reversable defect"],
+        help="Type of thalassemia defect (blood disorder)."
+    )
 
     submit_button = st.form_submit_button(label="Predict Risk")
-
+    
 # ================== Prediction ==================
 if submit_button:
     input_dict = {
