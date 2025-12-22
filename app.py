@@ -21,6 +21,22 @@ Predict the likelihood of heart disease using patient information.
 """
 )
 
+FEATURE_LABELS = {
+    "age": "Age",
+    "sex": "Sex",
+    "cp": "Chest Pain Type",
+    "trestbps": "Resting Blood Pressure",
+    "chol": "Cholesterol",
+    "fbs": "Fasting Blood Sugar",
+    "restecg": "Resting ECG",
+    "thalch": "Maximum Heart Rate Achieved",
+    "exang": "Exercise-Induced Angina",
+    "oldpeak": "ST Depression",
+    "slope": "ST Segment Slope",
+    "ca": "Number of Major Vessels",
+    "thal": "Thalassemia",
+}
+
 # ================== Load Model & Imputation ==================
 @st.cache_resource
 def load_model_and_imputers():
@@ -174,14 +190,17 @@ if submit_button:
         st.markdown(f"<div style='color:red; font-weight:bold;'>❌ High Risk | {pred_percent}</div>", unsafe_allow_html=True)
 
     # Missing data info
+    st.markdown("---")
     if missing_cols:
         with st.expander("Note: Some input values were missing"):
             st.markdown(
-                f"Missing inputs: {', '.join(missing_cols)}<br>"
-                "Missing numeric values were imputed using median, categorical with mode.<br>"
-                "Providing all values improves accuracy. Not a medical diagnosis.",
+                f"**Missing inputs:** {', '.join(missing_cols)}<br>"
+                "Missing values were handled using statistical imputation "
+                "(median for numeric features, most frequent value for categorical features).<br>"
+                "Providing all inputs improves prediction reliability.<br>"
+                "This tool provides risk estimation only and is not a medical diagnosis.",
                 unsafe_allow_html=True
-            )
+                )
 
 # ================== About Panel ==================
 with st.expander("About this Model"):
