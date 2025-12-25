@@ -1,15 +1,8 @@
-# CardioPredict: AI-Powered Heart Disease Risk Predictor
-🔗 Live Demo: [CardioPredict Streamlit App](https://cardiopredictapp.streamlit.app)
+# CardioPredict
+AI-Powered Heart Disease Risk Predictor (Demonstration Project)
 
-CardioPredict leverages the UCI Heart Disease dataset to estimate the probability of heart disease in a patient. Explainable AI techniques are integrated to ensure model transparency and support clinical trust in predictions.
-
----
-
-## Highlights
-- Random Forest model achieving ~83% accuracy and 0.89 ROC-AUC
-- SHAP-based global and patient-level explainability
-- Interactive Streamlit demo handling missing inputs
-- Fully reproducible ML workflow with preprocessing and deployment
+CardioPredict leverages the UCI Heart Disease dataset to **estimate the probability of heart disease** in a patient.  
+Explainable AI techniques are integrated to ensure model transparency and support clinical trust in predictions.
 
 ---
 
@@ -22,7 +15,7 @@ It is designed for demonstration and portfolio purposes, emphasizing reproducibi
 ## Dataset
 - Source: [UCI Heart Disease Dataset](https://archive.ics.uci.edu/ml/datasets/Heart+Disease) (303 samples, 14 features + target)
 - Target: `0` = no heart disease, `1` = heart disease present
-- Features include numeric (`age`, `trestbps`, `chol`, `thalch`, `oldpeak`) and categorical (`sex`, `cp`, `fbs`, `restecg`, `exang`, `slope`, `ca`, `thal`)
+- Features include numeric (age, trestbps, chol, thalach, oldpeak) and categorical (sex, cp, fbs, restecg, exang, slope, thal)
 - Missing or implausible values handled during preprocessing
 - Categorical variables encoded (binary directly, multi-class via pipeline)
 
@@ -41,7 +34,7 @@ It is designed for demonstration and portfolio purposes, emphasizing reproducibi
 ## Preprocessing & Feature Engineering
 - Numerical features standardized; outliers capped at 99th percentile
 - Skewed features (oldpeak) square-root transformed
-- Irrelevant or low-importance features dropped (`id`, dataset identifiers, negligible features)
+- Irrelevant or low-importance features dropped (id, dataset, negligible features)
 - Pipeline ensures reproducibility and prevents data leakage
 
 ---
@@ -55,16 +48,26 @@ It is designed for demonstration and portfolio purposes, emphasizing reproducibi
 ---
 
 ## Inference-Time Handling
-- Missing numeric and categorical inputs handled using median/mode imputation derived from training data
-- Clinical variables are **not inferred** from other features, avoiding compounded uncertainty
+- Missing numeric and categorical inputs handled using **median/mode imputation** derived from training data
+- Clinical variables **are not inferred** from other features, avoiding compounded uncertainty
 - Users are informed of any missing data used in predictions
 
 ---
 
 ## Results
 - Confusion matrix and ROC curve show strong classification performance
-- Key predictors: Age, chest pain type (`cp`), maximum heart rate achieved (`thalch`)
+- Key predictors: Age, chest pain type (cp), maximum heart rate achieved (thalach)
 - SHAP plots highlight patient-level risk factors
+
+---
+
+## Next Steps 
+1. Streamlit Demo Enhancements
+   - Thoroughly test app with edge cases
+   - Optionally add SHAP waterfall explanations for individual predictions
+2. Future Work
+   - Validate model on external datasets if available
+   - Monitor predictions for drift
 
 ---
 
@@ -79,11 +82,10 @@ CardioPredict/
 ├── requirements.txt # List of Python packages for reproducibility
 └── README.md        # Project overview, methodology, results, disclaimer
 
+
 ---
 
 ## Disclaimer
 This project is a **research and demonstration tool only**.  
 It **does not provide clinical diagnoses**.  
 Always consult qualified healthcare professionals for medical decisions.
-
-
