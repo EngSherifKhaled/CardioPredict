@@ -73,14 +73,14 @@ It is designed for demonstration and portfolio purposes, emphasizing reproducibi
 
 ## Project Structure
 
-CardioPredict/
-├── data/            # Original datasets
-├── notebooks/       # Jupyter/Colab notebook
-├── plots/           # Saved figures (confusion matrix, ROC, SHAP, waterfall, feature importance)
-├── model/           # Final model artifacts (rf_pipeline.pkl, impute_values.pkl)
-├── app/             # Streamlit demo application
-├── requirements.txt # List of Python packages for reproducibility
-└── README.md        # Project overview, methodology, results, disclaimer
+CardioPredict/  
+├── data/            # Original datasets  
+├── notebooks/       # Jupyter/Colab notebook  
+├── plots/           # Saved figures (confusion matrix, ROC, SHAP, waterfall, feature importance)  
+├── model/           # Final model artifacts (rf_pipeline.pkl, impute_values.pkl)  
+├── app/             # Streamlit demo application  
+├── requirements.txt # List of Python packages for reproducibility  
+└── README.md        # Project overview, methodology, results, disclaimer  
 
 
 ---
@@ -89,3 +89,4 @@ CardioPredict/
 This project is a **research and demonstration tool only**.  
 It **does not provide clinical diagnoses**.  
 Always consult qualified healthcare professionals for medical decisions.
+
